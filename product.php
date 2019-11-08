@@ -185,7 +185,7 @@
 				</div>
 				<?php
                     echo "<p>&nbsp;</p>";
-                    echo "Brand = ".ucwords($brand)."<br/>";
+                    echo "Brand = ".$brand_truetype."<br/>";
 					echo "Current Page = ".$page."<br/>";
 					echo "Next Page = ".$next_page."<br/>";
 					echo "Prev Page = ".$prev_page."<br/>";
