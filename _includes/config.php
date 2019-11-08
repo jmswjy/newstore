@@ -8,7 +8,7 @@
         $password 	= "";
         $dbname 	= "newstore";
     } else {
-        $base_url = "http://jmswijaya.com/webdev/";
+        $base_url = "http://jmswijaya.com/webdev/newstore";
         $servername = "localhost";
         $username 	= "kms";
         $password 	= "Kms_2017";
