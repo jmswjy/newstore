@@ -14,8 +14,9 @@
 	
 	require_once('_includes/cart.php'); //have $cart
 	require_once('_includes/check_visitor.php'); //have $visitor
-	
-	$cmd_extra = "";
+    
+    $brand = strtolower($_GET["brand"]);
+	$cmd_extra = "AND lower(b.name)='".$brand."'";
 	$cmd = "SELECT p.id product_id, p.name product_name, p.price, b.name brand_name 
 			FROM products p, brands b
 			WHERE p.brand_id=b.id $cmd_extra";
@@ -40,7 +41,18 @@
 		while($row = mysqli_fetch_assoc($limit_result)) {
 			$products[] = $row;
 		}
-	}
+    }
+    
+    //True Type
+    $brand_truetype = "";
+    $cmd2 = "SELECT b.name FROM brands b WHERE lower(b.name) = '$brand'";
+    $temp_result = mysqli_query($con,$cmd2) or die(mysqli_error($con));
+    $total_item = mysqli_num_rows($temp_result);
+    if ($total_item ==1){
+        //BACA: https://stackoverflow.com/questions/10605456/selecting-one-row-from-mysql-query-php
+        $item = mysqli_fetch_assoc($temp_result);
+        $brand_truetype = $item['name'];
+    }
 ?>
 <html>
 	<head>
@@ -65,13 +77,15 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
                     <ul class="nav navbar-nav">
-                        <li>
+                        <li class='<?php echo ($brand=='samsung') ? "active" : "" ?>'>
 							<a href="product.php?brand=samsung">Samsung</a>
 						</li>
-                        <li>
+                        <li class='<?php echo ($brand=='lg') ? "active" : "" ?>'>
 							<a href="product.php?brand=lg">LG</a>
 						</li>
-                        <li><a href="product.php?brand=sharp">Sharp</a></li>
+                        <li class='<?php echo ($brand=='sharp') ? "active" : "" ?>'>
+                            <a href="product.php?brand=sharp">Sharp</a>
+                        </li>
                     </ul>
 					<ul class="nav navbar-nav navbar-right"> 
 						<li>
@@ -107,6 +121,9 @@
             </div>
         </nav>
 		<div class='container'>
+            <div class='row col-md-12'>
+                <h1>Products of <?php echo $brand_truetype; ?></h1>
+            </div>
 			<div class='row' style='margin:0px auto;'>
 				<?php 
 					foreach($products as $product){
@@ -135,7 +152,7 @@
 							$prev_page = $page-1;
 							//echo "Prev: ".$prev_page;
 					?>
-						<a href='?page=<?php echo $prev_page; ?>' class="btn btn-default" title='Previous'>
+						<a href='product.php?brand=<?php echo $brand; ?>&page=<?php echo $prev_page; ?>' class="btn btn-default" title='Previous'>
 							<i class='glyphicon glyphicon-chevron-left'></i>
 							Previous
 						</a>
@@ -147,11 +164,11 @@
 								$flag_class = "active";
 							}
 							if($i==1){
-								echo "<a href='?page=$i' class='btn btn-default $flag_class' title='First'>$i</a>";
+								echo "<a href='product.php?brand=$brand&page=$i' class='btn btn-default $flag_class' title='First'>$i</a>";
 							} else if($i==$count_pages) {
-								echo "<a href='?page=$i' class='btn btn-default $flag_class' title='Last'>$i</a>";
+								echo "<a href='product.php?brand=$brand&page=$i' class='btn btn-default $flag_class' title='Last'>$i</a>";
 							} else {
-								echo "<a href='?page=$i' class='btn btn-default $flag_class' title='Page $i'>$i</a>";
+								echo "<a href='product.php?brand=$brand&page=$i' class='btn btn-default $flag_class' title='Page $i'>$i</a>";
 							}
 						}
 					?>
@@ -159,7 +176,7 @@
 						if ($page<$count_pages){
 							$next_page = $page+1;
 							//echo "Next: ".$next_page;
-							echo "<a href='?page=$next_page' class='btn btn-default' title='Next'>
+							echo "<a href='product.php?brand=$brand&page=$next_page' class='btn btn-default' title='Next'>
 										Next
 										<i class='glyphicon glyphicon-chevron-right'></i>
 									</a>";
@@ -167,7 +184,8 @@
 					?>
 				</div>
 				<?php
-					echo "<p>&nbsp;</p>";
+                    echo "<p>&nbsp;</p>";
+                    echo "Brand = ".ucwords($brand)."<br/>";
 					echo "Current Page = ".$page."<br/>";
 					echo "Next Page = ".$next_page."<br/>";
 					echo "Prev Page = ".$prev_page."<br/>";
