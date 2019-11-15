@@ -14,9 +14,13 @@
 	
 	require_once('_includes/cart.php'); //have $cart
 	require_once('_includes/check_visitor.php'); //have $visitor
+	
+	$cmd_extra = "";
+	if(isset($_GET["brand"])){
+		$brand = strtolower($_GET["brand"]);
+		$cmd_extra = "AND lower(b.name)='".$brand."'";
+	}
     
-    $brand = strtolower($_GET["brand"]);
-	$cmd_extra = "AND lower(b.name)='".$brand."'";
 	$cmd = "SELECT p.id product_id, p.name product_name, p.price, b.name brand_name 
 			FROM products p, brands b
 			WHERE p.brand_id=b.id $cmd_extra";

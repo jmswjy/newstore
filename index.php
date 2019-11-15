@@ -90,7 +90,7 @@
 								if ($visitor == 'Guest'){
 							?>
 								<ul class="dropdown-menu">
-									<li><a href="profile.php">Register</a></li>
+									<li><a href="register.php">Register</a></li>
 									<li><a href="login.php">Login</a></li>
 								</ul>
 							<?php } else { ?>

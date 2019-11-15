@@ -1,5 +1,11 @@
 <?php
-    $ip_server = $_SERVER['SERVER_ADDR'];
+    $base_url = "http://localhost/webdev/newstore/";
+    $servername = "localhost";
+    $username 	= "root";
+    $password 	= "";
+    $dbname 	= "newstore";
+    
+    /*$ip_server = $_SERVER['SERVER_ADDR'];
 
     if(($ip_server=='127.0.0.1')||($ip_server=="::1")){
         $base_url = "http://localhost/webdev/newstore/";
@@ -13,6 +19,6 @@
         $username 	= "kms";
         $password 	= "Kms_2017";
         $dbname 	= "kms_02";
-    }
+    }*/
     
 ?>
