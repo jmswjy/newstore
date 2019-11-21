@@ -14,9 +14,9 @@
         $qtyBarang  = $p['qty'];
 
         foreach($_SESSION['cart'] as $key=>$value){
-            $item_cart = $value;
+            //$item_cart = $value;
             //print_r($item_cart);
-            if($item_cart['id'] == $idBarang){
+            if($value['id'] == $idBarang){
                 //$item_cart['qty'] = $qtyBarang;
                 $_SESSION['cart'][$key]['qty'] = $qtyBarang;
             }
