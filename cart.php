@@ -74,6 +74,7 @@
         </nav>
 		<div class='container'>
 			<div class='row text-center'>
+				<h1>Isi Cart</h1>
 				<br>
 				Session ID: <?php echo session_id(); ?>
 			</div>

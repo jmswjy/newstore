@@ -52,6 +52,7 @@
                 <th>Brand</th>
                 <th>Qty</th>
                 <th>Price</th>
+                <th>Action</th>
             </tr>
             <?php
                 //foreach($products as $key=>$value) is_array()
@@ -69,6 +70,11 @@
                         echo "<td>".$product['brand_name']."</td>";
                         echo "<td>".$product['qty']."</td>";
                         echo "<td>".number_format($price, 2, ",", ".")."</td>"; 
+                        echo "<td>";
+                        echo "<a href='action_cart.php?id=".$product['product_id']."'>";
+                        echo "Beli";
+                        echo "</a>";
+                        echo "</td>";
                     echo "</tr>";
                 }
             ?>

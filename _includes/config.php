@@ -1,9 +1,9 @@
 <?php
     $base_url = "http://localhost/webdev/newstore/";
-    $servername = "localhost";
-    $username 	= "root";
-    $password 	= "";
-    $dbname 	= "newstore";
+    $servername = "jmswijaya.com";
+    $username 	= "kms";
+    $password 	= "Kms_2017";
+    $dbname 	= "kms_02";
     
     /*$ip_server = $_SERVER['SERVER_ADDR'];
 
